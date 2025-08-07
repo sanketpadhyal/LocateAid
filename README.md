@@ -19,7 +19,15 @@ LocateAid is a minimal, fast, and effective web app that helps users locate near
 
 ---
 
-## 🛠️ Built With
+## 🛠️ Admin Panel
+
+Admins can manually add new cities and their emergency services if they're not covered by the API.  
+🔗 **Admin Panel:** [https://effulgent-buttercream-353255.netlify.app/admin](https://effulgent-buttercream-353255.netlify.app/admin)  
+🔑 **Password:** `sanket`
+
+---
+
+## 📦 Tech Stack
 
 - HTML, CSS (custom styles), JavaScript  
 - Node.js (Express backend)  
