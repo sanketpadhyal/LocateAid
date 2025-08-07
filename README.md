@@ -1,0 +1,48 @@
+# LocateAid 🚑
+
+**Find emergency services near you — fast.**
+
+LocateAid is a minimal, fast, and effective web app that helps users locate nearby emergency services like hospitals, police stations, and more. Designed with simplicity and reliability in mind, it's ideal for real-time use when it matters most.
+
+---
+
+## 🔍 Features
+
+- 📍 **Live Location Search** using Geoapify API  
+- 🏙️ **Manual City Search** fallback when live data is missing  
+- 🧩 **Admin Panel** with login to add custom cities and services  
+- 📁 Data stored in backend JSON files for unmatched control  
+- 📱 Fully **mobile-responsive**  
+- 🎯 **Minimal UI** built from scratch for speed and clarity  
+- ☁️ Hosted on [Replit](https://effulgent-buttercream-353255.netlify.app/) with a secure backend  
+- 🚀 No unnecessary load — just fast, emergency-ready UI  
+
+---
+
+## 🛠️ Built With
+
+- HTML, CSS (custom styles), JavaScript  
+- Node.js (Express backend)  
+- Geoapify Places API  
+- Deployed via Replit
+
+---
+
+## 👨‍💻 Developer Info
+
+Made with ❤️ by [Sanket Padhyal](https://github.com/sanketpadhyal)  
+> A self-taught developer with 15+ live websites & 4+ backend projects.
+
+---
+
+## 📩 Contact
+
+For LocateAid-related issues or suggestions:  
+📧 **sanketpadhyal3@gmail.com**
+
+---
+
+
+## ⚠️ Note
+
+This app is built for emergency use with simplicity as the core. No flashy UI/UX — just reliable, quick access to life-saving info.
