@@ -31,7 +31,7 @@ LocateAid is a minimal, fast, and effective web app that helps users locate near
 ## 👨‍💻 Developer Info
 
 Made with ❤️ by [Sanket Padhyal](https://github.com/sanketpadhyal)  
-> A self-taught developer with 15+ live websites & 4+ backend projects.
+> A self-taught developer.
 
 ---
 
