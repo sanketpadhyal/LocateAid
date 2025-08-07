@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="assets/app.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LocateAid | Find Help Near You</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-800">
+
+  <!-- Navbar -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-blue-600">LocateAid</h1>
+      <nav class="hidden md:flex space-x-6 items-center">
+        <a href="index.html" class="text-gray-700 hover:text-blue-600">Home</a>
+        <a href="about.html" class="text-gray-700 hover:text-blue-600">About</a>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sanketpadhyal3@gmail.com&su=LocateAid%20Support%20Request"
+          target="_blank"
+          class="block py-2 text-gray-700 hover:text-blue-600"">
+         Contact
+          </a>
+      </nav>
+      <div class="md:hidden">
+        <button id="menuBtn" class="focus:outline-none">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+               xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="md:hidden hidden px-4 pb-4">
+      <a href="index.html" class="block py-2 text-gray-700 hover:text-blue-600">Home</a>
+      <a href="about.html" class="block py-2 text-gray-700 hover:text-blue-600">About</a>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sanketpadhyal3@gmail.com&su=LocateAid%20Support%20Request"
+          target="_blank"
+          class="block py-2 text-gray-700 hover:text-blue-600"">
+         Contact
+          </a>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="min-h-screen flex flex-col items-center justify-center text-center px-4">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">Find Emergency Help Near You</h2>
+    <p class="text-gray-600 mb-6">Click below to allow location access or manually search by city.</p>
+
+    <!-- Auto Location -->
+    <button id="locateBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded mb-4">
+      Allow Location Access
+    </button>
+
+    <!-- Fallback Search Button -->
+    <button id="fallbackSearchBtn"
+            class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded mb-4 hidden">
+      Search by City Instead
+    </button>
+
+    <!-- Manual Button -->
+    <button id="manualBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded mb-4">
+      Find Manually
+    </button>
+
+    <!-- Manual Input -->
+    <div id="manualSearchArea" class="w-full max-w-sm mb-6 hidden transition-all duration-300">
+      <input id="manualCityInput" type="text" placeholder="Type city name (e.g. mumbai)"
+             class="w-full px-4 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      <button id="manualSearchBtn"
+              class="mt-2 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+        Search
+      </button>
+    </div>
+
+    <div id="status" class="text-sm text-red-600 mb-4"></div>
+    <div id="results" class="w-full max-w-2xl space-y-4 px-2"></div>
+  </main>
+
+  <!-- Logic -->
+  <script>
+    const locateBtn = document.getElementById('locateBtn');
+    const manualBtn = document.getElementById('manualBtn');
+    const fallbackSearchBtn = document.getElementById('fallbackSearchBtn');
+    const manualInput = document.getElementById('manualCityInput');
+    const manualSearchBtn = document.getElementById('manualSearchBtn');
+    const manualSearchArea = document.getElementById('manualSearchArea');
+    const status = document.getElementById('status');
+    const results = document.getElementById('results');
+
+    const BASE_URL = "ADD_YOU_BACKEND_URL_HERE";
+
+    locateBtn.addEventListener('click', () => {
+      status.textContent = "Fetching your location...";
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const { latitude, longitude } = position.coords;
+          status.textContent = "Fetching nearby services...";
+          try {
+            const res = await fetch(`${BASE_URL}/api/getEmergency?lat=${latitude}&lng=${longitude}`);
+            const data = await res.json();
+            displayResults(data.places || data.data);
+          } catch (err) {
+            status.textContent = "Something went wrong Side Server is turned off contact developer.";
+          }
+        },
+        () => {
+          status.textContent = "Location permission denied.";
+        }
+      );
+    });
+
+    manualBtn.addEventListener('click', () => {
+      manualSearchArea.classList.toggle('hidden');
+      manualInput.focus();
+    });
+
+    fallbackSearchBtn.addEventListener('click', () => {
+      manualSearchArea.classList.remove('hidden');
+      manualInput.focus();
+    });
+
+    manualSearchBtn.addEventListener('click', () => {
+      const city = manualInput.value.trim();
+      if (!city) {
+        status.textContent = "Please enter a city name.";
+        return;
+      }
+      fetchByCity(city);
+    });
+
+    async function fetchByCity(city) {
+      status.textContent = `Searching emergency services in "${city}"...`;
+      try {
+        const res = await fetch(`${BASE_URL}/api/getEmergency?city=${city.toLowerCase()}`);
+        const data = await res.json();
+        document.title = `LocateAid | Results in ${city}`;
+        displayResults(data.data || data.places);
+      } catch (err) {
+        status.textContent = "Side Server is turned off, contact developer.";
+      }
+    }
+
+    function getReadableType(type) {
+      if (type.includes("hospital")) return "Hospital";
+      if (type.includes("fire_station")) return "Fire Station";
+      if (type.includes("police")) return "Police Station";
+      return "Emergency Service";
+    }
+
+    function displayResults(places) {
+      if (places?.length > 0) {
+        results.innerHTML = places.map(place => {
+          const mapQuery = encodeURIComponent(`${place.name} ${place.address || ''}`);
+          const mapLink = `
+            <a href="https://www.google.com/maps/search/?api=1&query=${mapQuery}" 
+               target="_blank" 
+               class="inline-flex items-center gap-1 mt-2 px-3 py-1 bg-gray-100 text-sm text-blue-600 rounded hover:bg-gray-200 transition">
+              <img src="https://www.gstatic.com/images/branding/product/1x/maps_48dp.png" alt="Google Maps" class="w-4 h-4" />
+              View on Map
+            </a>`;
+
+          return `
+            <div class="border rounded p-4 shadow bg-white">
+              <h3 class="text-lg font-bold">${place.name}</h3>
+              <p class="text-sm text-gray-600">${getReadableType(place.type)}</p>
+              <p class="text-sm">${place.address}</p>
+              ${mapLink}
+            </div>`;
+        }).join('');
+        status.textContent = "";
+        fallbackSearchBtn.classList.add("hidden");
+      } else {
+        status.innerHTML = `
+          🚨 <span>No nearby hospitals, fire stations, or police found.</span>
+          <br/>Try another city or click "Find Manually".
+        `;
+        results.innerHTML = "";
+        fallbackSearchBtn.classList.remove("hidden");
+      }
+    }
+  </script>
+
+  <!-- Hamburger Menu -->
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  </script>
+</body>
+</html>

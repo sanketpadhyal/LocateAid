@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>About | LocateAid</title>
+    <link rel="icon" href="assets/index.png" type="image/png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-white text-gray-800">
+    <div class="flex flex-col min-h-screen">
+      <!-- Navbar -->
+      <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+          <h1 class="text-2xl font-bold text-blue-600">LocateAid</h1>
+
+          <!-- Desktop Menu -->
+          <nav class="hidden md:flex space-x-6 items-center">
+            <a href="index.html" class="text-gray-700 hover:text-blue-600">Home</a>
+            <a href="about.html" class="text-gray-700 hover:text-blue-600">About</a>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sanketpadhyal3@gmail.com&su=LocateAid%20Support%20Request"
+          target="_blank"
+          class="block py-2 text-gray-700 hover:text-blue-600"">
+         Contact
+          </a>
+
+          </nav>
+
+          <!-- Hamburger -->
+          <div class="md:hidden">
+            <button id="menuBtn" class="focus:outline-none">
+              <svg
+                class="w-6 h-6 text-blue-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden hidden px-4 pb-4">
+          <a href="index.html" class="block py-2 text-gray-700 hover:text-blue-600">Home</a>
+          <a href="about.html" class="block py-2 text-gray-700 hover:text-blue-600">About</a>
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sanketpadhyal3@gmail.com&su=LocateAid%20Support%20Request"
+          target="_blank"
+          class="block py-2 text-gray-700 hover:text-blue-600"">
+         Contact
+          </a>
+        </div>
+      </header>
+
+ <!-- About Content -->
+<main class="flex-grow bg-gradient-to-br from-blue-100 to-white py-16 px-6">
+  <div class="max-w-4xl mx-auto text-center space-y-6">
+    <h2 class="text-4xl md:text-5xl font-bold text-blue-700">About LocateAid 🚑</h2>
+    <p class="text-lg text-gray-700">
+      LocateAid is your trusted emergency companion. Whether you're in a new city or need urgent help,
+      we use your live location to find nearby hospitals, police stations, and more — instantly.
+    </p>
+
+    <div class="bg-white rounded-xl shadow-md p-6 mt-8 text-left space-y-4">
+      <h3 class="text-2xl font-semibold text-blue-600">🌱 Our Journey</h3>
+      <p>
+        Built in 2025 by <strong>Sanket Padhyal</strong>, LocateAid was made entirely from scratch — no templates.
+        It’s a project crafted with love, code, and real-world need.
+      </p>
+      <p>
+        I’m a self-taught developer with over 15+ live websites and 4+ backend projects. This idea came from a real problem: 
+        finding emergency help quickly in unknown cities. From backend APIs to manual city support and a beautiful mobile experience — 
+        it’s all custom-built.
+      </p>
+
+      <p class="pt-4 text-gray-800">
+        We made this website very easy and minimal — just like a government website, with no loading issues and no fancy UI/UX. 
+        It’s designed to be accessible and usable for everyone during emergencies. We also have an admin panel to manually 
+        add cities or locations that aren't covered by the live API.
+      </p>
+
+      <div class="flex justify-start items-center pt-4">
+        <a href="https://github.com/sanketpadhyal" target="_blank"
+           class="flex items-center space-x-2 text-blue-600 hover:underline font-semibold text-lg">
+          <img src="https://img.icons8.com/ios-glyphs/30/000000/github.png" class="w-6 h-6" />
+          <span>GitHub Profile</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+      <!-- Footer -->
+      <footer class="bg-gray-100 text-gray-700">
+        <div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+          <div>
+            <h2 class="text-2xl font-bold text-blue-600">LocateAid</h2>
+            <p class="mt-2 text-sm">Your fastest way to find emergency services nearby. Stay safe, stay aware.</p>
+          </div>
+          <div></div>
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Contact</h3>
+            <p class="text-sm">Email: sanketpadhyal3@gmail.com</p>
+            <p class="text-sm">© 2025 LocateAid. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </div>      
+        <!-- JS for Hamburger -->
+    <script>
+      const menuBtn = document.getElementById("menuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+    </script>
+  </body>
+</html>

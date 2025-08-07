@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="assets/admin.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LocateAid Admin Panel</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: url("assets/bg.jpg") no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: start;
+      padding: 40px 16px;
+      color: #ffffff;
+    }
+
+    .background {
+      display: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .card {
+      width: 100%;
+      padding: 30px 24px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: all 0.3s ease-in-out;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      outline: none;
+      box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.1);
+    }
+
+    input::placeholder, select {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    select option {
+      color: #000;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #fff;
+      background: rgba(0, 123, 255, 0.7);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background: rgba(0, 123, 255, 0.9);
+      transform: translateY(-2px);
+    }
+
+.add-btn {
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #88ff00, #02ff67);
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  box-shadow: 0 4px 15px rgba(255, 0, 43, 0.4);
+  backdrop-filter: blur(10px);
+  letter-spacing: 1px;
+}
+
+.add-btn:hover {
+  background: linear-gradient(135deg, #44ff00, #04ff00);
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(255, 0, 43, 0.8), 
+              0 0 25px rgba(38, 255, 0, 0.6);
+}
+
+.logout-btn {
+  display: block;
+  margin-top: 7px;
+  padding: 10px 20px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 999px; 
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.95rem;
+  box-shadow: 0 0 12px rgba(255, 77, 77, 0.6); 
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #e60000;
+  box-shadow: 0 0 18px rgba(230, 0, 0, 0.8); 
+  transform: scale(1.05);
+}
+
+
+    .latlng {
+      display: flex;
+      gap: 10px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .success {
+      color: #00ff2a;
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+
+    .error {
+      color: #ff0000;
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 500px) {
+      .latlng {
+        flex-direction: column;
+      }
+    }
+
+#adminPassword {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 15px 0;
+  font-size: 16px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.2);
+  transition: 0.3s ease all;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+#adminPassword::placeholder {
+  color: rgba(255, 0, 0, 0.69);
+  font-style: italic;
+}
+
+#adminPassword:focus {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px rgb(3, 70, 255), 
+              0 0 20px rgba(144, 224, 239, 0.4);
+  transform: scale(1.02);
+}
+
+#loginError {
+  margin-top: 12px; 
+}
+
+.admin-heading {
+  background: linear-gradient(90deg, #4facfe, #00f2fe);
+  color: white;
+  font-size: 24px;
+  text-align: center;
+  padding: 12px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 242, 254, 0.4);
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  animation: glowPulse 2s infinite ease-in-out;
+}
+
+
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 4px 15px rgba(0, 242, 254, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 25px rgba(0, 242, 254, 0.7);
+  }
+  100% {
+    box-shadow: 0 4px 15px rgba(0, 242, 254, 0.4);
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+
+  <div class="container">
+    <!-- LOGIN -->
+    <div id="loginSection" class="card login-card">
+      <h2 class="title"><i>Welcome Back 🔐</i></h2>
+<p style="text-align: center; color: rgba(255,255,255,0.7); margin-bottom: 20px;">
+  <i>Only authorized admins can access this panel.</i>
+</p>
+      <input type="password" id="adminPassword" placeholder="Enter Admin Password" />
+      <button id="loginBtn">Login Now</button>
+      <p id="loginError" class="error hidden"><strong><i>Incorrect password. Try again!</i></strong></p>
+      <p id="loginError" class="error hidden"><strong>Incorrect password. Try again!</strong></p>
+      <p id="serverError" class="error hidden"><strong>Side server is turned off. Please contact the developer.</strong></p>
+     </div>
+
+    <!-- ADMIN PANEL -->
+    <div id="adminPanel" class="card admin-card hidden">
+      <div class="panel-header">
+     <h2 class="title admin-heading">Admin Dashboard</h2>
+      </div>
+
+      <input type="text" id="cityInput" placeholder="City Name (e.g., mumbai)" />
+      <input type="text" id="theirCityInput" placeholder="Their City (optional)" />
+      <input type="text" id="nameInput" placeholder="Service Name" />
+      <input type="text" id="addressInput" placeholder="Address" />
+
+      <div class="latlng">
+        <input type="text" id="latInput" placeholder="Latitude (optional)" />
+        <input type="text" id="lngInput" placeholder="Longitude (optional)" />
+      </div>
+
+      <select id="typeInput">
+        <option value="">Select Type</option>
+        <option value="hospital">Hospital</option>
+        <option value="fire_station">Fire Station</option>
+        <option value="police">Police Station</option>
+      </select>
+
+      <input type="text" id="mapLinkInput" placeholder="Google Maps Link (optional)" />
+
+      <button id="submitBtn" class="add-btn">Add Emergency Service</button>
+      <p id="submitSuccess" class="success hidden"><strong>🎉 Successfully added!</strong></p>
+      <button id="logoutBtn" class="logout-btn hidden">Logout</button>
+    </div>
+  </div>
+
+  <script>
+  const BASE_URL = "ADD_YOU_BACKEND_URL_HERE";
+
+  const loginSection = document.getElementById("loginSection");
+  const adminPanel = document.getElementById("adminPanel");
+  const loginBtn = document.getElementById("loginBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const loginError = document.getElementById("loginError");
+  const submitSuccess = document.getElementById("submitSuccess");
+
+  let adminPassword = "";
+
+  loginBtn.addEventListener("click", async () => {
+    adminPassword = document.getElementById("adminPassword").value;
+
+    try {
+      const res = await fetch(`${BASE_URL}/api/admin/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: adminPassword }),
+      });
+
+      if (res.ok) {
+        loginSection.classList.add("hidden");
+        adminPanel.classList.remove("hidden");
+        loginError.classList.add("hidden");
+        logoutBtn.classList.remove("hidden");
+      } else {
+        loginError.classList.remove("hidden");
+      }
+    } catch (error) {
+      alert("Side server is turned off. Please contact the developer.");
+      console.error("Login error:", error);
+    }
+  });
+
+  logoutBtn.addEventListener("click", () => {
+    adminPassword = "";
+    loginSection.classList.remove("hidden");
+    adminPanel.classList.add("hidden");
+  });
+
+  document.getElementById("submitBtn").addEventListener("click", async () => {
+    const city = document.getElementById("cityInput").value.trim().toLowerCase();
+    const theirCity = document.getElementById("theirCityInput").value.trim();
+    const name = document.getElementById("nameInput").value.trim();
+    const address = document.getElementById("addressInput").value.trim();
+    const lat = parseFloat(document.getElementById("latInput").value);
+    const lng = parseFloat(document.getElementById("lngInput").value);
+    const type = document.getElementById("typeInput").value;
+    const mapLink = document.getElementById("mapLinkInput").value.trim();
+
+    if (!city || !name || !address || !type) {
+      alert("Please fill in required fields.");
+      return;
+    }
+
+    const payload = {
+      city,
+      password: adminPassword,
+      data: [
+        {
+          name,
+          address,
+          lat: isNaN(lat) ? undefined : lat,
+          lng: isNaN(lng) ? undefined : lng,
+          type,
+          city: theirCity || undefined,
+          mapLink: mapLink || undefined,
+        }
+      ]
+    };
+
+    try {
+      const res = await fetch(`${BASE_URL}/api/admin/addCity`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        submitSuccess.classList.remove("hidden");
+        setTimeout(() => submitSuccess.classList.add("hidden"), 2000);
+      } else {
+        alert("Failed to add service.");
+      }
+    } catch (error) {
+      alert("Side server is turned off. Please contact the developer.");
+      console.error("Submission error:", error);
+    }
+  });
+</script>
+
+</body>
+</html>
