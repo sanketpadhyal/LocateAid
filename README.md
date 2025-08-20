@@ -14,7 +14,7 @@ LocateAid is a minimal, fast, and effective web app that helps users locate near
 - 📁 Data stored in backend JSON files for unmatched control  
 - 📱 Fully **mobile-responsive**  
 - 🎯 **Minimal UI** built from scratch for speed and clarity  
-- ☁️ Hosted on [Replit](https://dainty-yeot-d3e3f9.netlify.app) with a secure backend. 
+- ☁️ Hosted on [Replit](https://locateaid.netlify.app) with a secure backend. 
 - 🚀 No unnecessary load — just fast, emergency-ready UI  
 
 ---
