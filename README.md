@@ -8,7 +8,6 @@ Built with **speed, simplicity, and reliability** in mind, it ensures real-time 
 ![Made with Node.js](https://img.shields.io/badge/Made%20with-Node.js-green?style=flat&logo=node.js)  
 ![Frontend](https://img.shields.io/badge/Frontend-HTML%2C%20CSS%2C%20JS-blue?style=flat)  
 ![Hosting](https://img.shields.io/badge/Hosted%20on-Netlify-brightgreen?style=flat&logo=netlify)  
-![License](https://img.shields.io/badge/License-MIT-orange?style=flat)  
 ---
 
 ## 🔍 Features  
