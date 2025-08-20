@@ -22,7 +22,7 @@ LocateAid is a minimal, fast, and effective web app that helps users locate near
 ## 🛠️ Admin Panel
 
 Admins can manually add new cities and their emergency services if they're not covered by the API.  
-🔗 **Admin Panel:** [https://dainty-yeot-d3e3f9.netlify.app/admin](https://dainty-yeot-d3e3f9.netlify.app/admin)  
+🔗 **Admin Panel:** [https://locateaid.netlify.app/admin](https://locateaid.netlify.app/admin)  
 🔑 **Password:** `sanket`
 
 ---
