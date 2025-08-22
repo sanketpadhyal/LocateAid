@@ -5,7 +5,7 @@
 LocateAid is a **lightweight, static web application** designed to help users quickly find nearby emergency services such as hospitals, police stations, and more.  
 Built with **speed, simplicity, and reliability** in mind, it ensures real-time access when every second matters.  
 
->> Working On v2 Right Now.
+>> Working On v2 Right Now. Adding New Features 👻🫶🏻
 ---
 
 ![Made with Node.js](https://img.shields.io/badge/Made%20with-Node.js-green?style=flat&logo=node.js)  
